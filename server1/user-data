@@ -18,23 +18,28 @@ autoinstall:
   ssh:
     allow-pw: true
     install-server: true
-  apt:
-    primary:
-      - arches: [default]
-        uri: http://dk.archive.ubuntu.com/ubuntu/
+  #apt:
+  #  primary:
+  #    - arches: [default]
+  #      uri: http://dk.archive.ubuntu.com/ubuntu/
  #   sources:     # Example for adding a ppa source
  #     ignored1:  # This is here to get the yaml formatting right when adding a ppa
  #       source: ppa:graphics-drivers/ppa
-  packages: 
-    - build-essential
-    - network-manager
-    - dkms
-    - emacs-nox
-    - neofetch
-    - ubuntu-desktop-minimal^  # uncomment to add a minimal desktop
-  package_update: true
-  package_upgrade: true
-  late-commands:
+  #packages: 
+  #  - neofetch
+    #- build-essential
+    #- network-manager
+    #- dkms
+    #- emacs-nox
+    #- ubuntu-desktop-minimal^  # uncomment to add a minimal desktop
+  #package_update: true
+  #package_upgrade: true
+  #late-commands:
+    # copy downloaded apt files to new system
+    #- rm -r /target/var/cache/apt
+    #- cp -r /media/minimal/var/cache/apt /target/var/cache/
+    #- curtin in-target --target /target -- apt-get -yy install neofetch
+  #late-commands:
     # Changing from networkd to NetworkManager
     # move existing config out of the way
     #- find /target/etc/netplan/ -name "*.yaml" -exec sh -c 'mv "$1" "$1-orig"' _ {} \;
@@ -49,7 +54,20 @@ autoinstall:
     #- curtin in-target --target /target netplan apply
     #- curtin in-target --target /target systemctl enable NetworkManager.service
     # Install NVIDIA driver (with apt-get flags)
-    - curtin in-target -- apt-get -y install --no-install-recommends nvidia-driver-520 
+    #- curtin in-target -- apt-get -y install --no-install-recommends nvidia-driver-520 
+  late-commands:
+      - rm -r /target/var/cache/apt
+      - cp -r /media/minimal/var/cache/apt /target/var/cache/
+  user-data:
+    runcmd:
+      - [apt-get, remove, -yy, update-manager-core]
+      - [systemctl, disable, apt-daily.service]
+      - [systemctl, disable, apt-daily.timer]
+      - [apt-get, autoremove, -yy]
+      - [cp, /opt/autoinstall/apt-install-cache.service, /usr/lib/systemd/system/]
+      - [cp, /opt/autoinstall/apt-install-cache.sh, /usr/bin/]
+      - [systemctl, enable, apt-install-cache.service]
+      - [reboot]
   #user-data: # Commands here run during first boot (cannot be interactive)
   #  runcmd:
   #    # Install the NVIDIA driver from the ppa we setup earlier
