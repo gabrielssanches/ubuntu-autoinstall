@@ -38,8 +38,8 @@ else
 fi
 
 echo "Removing this script from systemd" | systemd-cat -t "autoinstall"
-systemctl disable apt-install-cache.service
-rm /usr/lib/systemd/system/apt-install-cache.service
+systemctl disable post-install.service
+rm /usr/lib/systemd/system/post-install.service
 rm /etc/issue
 mv /etc/issue_ /etc/issue
 

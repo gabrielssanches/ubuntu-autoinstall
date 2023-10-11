@@ -8,7 +8,7 @@
 #  (at your option) any later version.
 
 [Unit]
-Description=Installs apt cached software
+Description=Post installation service
 DefaultDependencies=no
 Conflicts=shutdown.target
 Before=shutdown.target
@@ -18,7 +18,7 @@ ConditionPathIsReadWrite=/var/cache/apt/archives
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/bin/bash /usr/bin/apt-install-cache.sh
+ExecStart=/bin/bash /usr/bin/post-install.sh
 
 [Install]
 WantedBy=multi-user.target
