@@ -67,7 +67,8 @@ autoinstall:
       - [cp, /etc/issue, /etc/issue_]
       - [/bin/bash, /opt/autoinstall/issue.sh]
       - [cp, /opt/autoinstall/post-install.service, /usr/lib/systemd/system/]
-      - [cp, /opt/autoinstall/post-install*.sh, /usr/bin/]
+      - [cp, /opt/autoinstall/post-install.sh, /usr/bin/]
+      - [cp, /opt/autoinstall/post-install-1.sh, /usr/bin/]
       - [systemctl, enable, post-install.service]
       - [reboot]
   #user-data: # Commands here run during first boot (cannot be interactive)

@@ -40,8 +40,9 @@ patch_ubuntu_installer() {
     systemd_wait_online_timeout && \
     mkdir -p edit/opt/autoinstall && \
     cp ../${1}/post-install.service edit/opt/autoinstall && \
-    cp ../${1}/post-install*.sh edit/opt/autoinstall && \
-    cp ../${1}/issue edit/opt/autoinstall && \
+    cp ../${1}/post-install.sh edit/opt/autoinstall && \
+    cp ../${1}/post-install-1.sh edit/opt/autoinstall && \
+    cp ../${1}/issue.sh edit/opt/autoinstall && \
     mkdir -p edit/customfolder && \
     cp -rl ../${1}/customfolder/* edit/customfolder && \
     chmod -R +r edit/customfolder && \
