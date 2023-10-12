@@ -84,7 +84,7 @@ rm -rf ${BUILDDIR} && \
     cd source-files && \
     rm -f ../../ubuntu-22.04-autoinstall.iso && \
     xorriso -as mkisofs -r \
-        -V '(Ubuntu 22.04 LTS)(EFIBIOS)' \
+        -V 'Ubuntu22' \
         -o ${BUILDDIR_PATH}/ubuntu-22.04-autoinstall.iso \
         --grub2-mbr ../BOOT/1-Boot-NoEmul.img \
         -partition_offset 16 \

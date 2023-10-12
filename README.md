@@ -3,16 +3,10 @@
 1. Build docker
 2. Build ISO
 
-## Build docker
-
-```bash
-docker build -t bb8 ./docker/
-```
-
 ## Build ISO
 
 ```bash
-./build.sh
+docker/build.sh <config>
 ```
 
 ## ISO Customization
