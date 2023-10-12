@@ -39,9 +39,9 @@ patch_ubuntu_installer() {
     chroot_script_create ${1} && \
     systemd_wait_online_timeout && \
     mkdir -p edit/opt/autoinstall && \
-    cp ../${1}/apt-install-cache.service edit/opt/autoinstall && \
-    cp ../${1}/apt-install-cache.sh edit/opt/autoinstall && \
-    cp ../${1}/post_install.sh edit/opt/autoinstall && \
+    cp ../${1}/post-install.service edit/opt/autoinstall && \
+    cp ../${1}/post-install*.sh edit/opt/autoinstall && \
+    cp ../${1}/issue edit/opt/autoinstall && \
     mkdir -p edit/customfolder && \
     cp -rl ../${1}/customfolder/* edit/customfolder && \
     chmod -R +r edit/customfolder && \

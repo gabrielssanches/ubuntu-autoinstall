@@ -64,9 +64,11 @@ autoinstall:
       - [systemctl, disable, apt-daily.service]
       - [systemctl, disable, apt-daily.timer]
       - [apt-get, autoremove, -yy]
-      - [cp, /opt/autoinstall/apt-install-cache.service, /usr/lib/systemd/system/]
-      - [cp, /opt/autoinstall/apt-install-cache.sh, /usr/bin/]
-      - [systemctl, enable, apt-install-cache.service]
+      - [cp, /etc/issue, /etc/issue_]
+      - [/bin/bash, /opt/autoinstall/issue.sh]
+      - [cp, /opt/autoinstall/post-install.service, /usr/lib/systemd/system/]
+      - [cp, /opt/autoinstall/post-install*.sh, /usr/bin/]
+      - [systemctl, enable, post-install.service]
       - [reboot]
   #user-data: # Commands here run during first boot (cannot be interactive)
   #  runcmd:
